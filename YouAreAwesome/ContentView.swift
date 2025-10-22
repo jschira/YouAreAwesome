@@ -10,6 +10,8 @@ import SwiftUI
 struct ContentView: View {
     @State private var message = ""
     @State private var imageName = ""
+    @State private var imageNumber = 0
+    @State private var messageNumber = 0
     
     var body: some View {
         
@@ -25,23 +27,34 @@ struct ContentView: View {
                 .font(.largeTitle)
                 .fontWeight(.heavy)
                 .foregroundStyle(.red)
+                .multilineTextAlignment(.center)
             Spacer()
             Button("Press Me!") {
-                let awesomeMessage = "You are Awesome!"
-                let awesomeImage = "image0"
-                let greatMessage = "You are Great!"
-                let greatImage = "image1"
-                message = (message == awesomeMessage ? greatMessage : awesomeMessage)
-                imageName = (imageName == awesomeImage ? greatImage : awesomeImage)
-//                if (message == awesomeMessage) {
-//                    message = greatMessage
-//                    imageName = greatImage
-//                } else {
-//                    message = awesomeMessage
-//                    imageName = awesomeImage
-//                }
+                let messages: [String] = [
+                    "You Are Awesome!",
+                    "You Are Great!",
+                    "Fabulous? That's You!",
+                    "You don't suck. You're awesome! So, so awesome",
+                    "You look fabulous!",
+                    "Didn't I see you on TV?",
+                    "Dingie Dan.",
+                    "Mo Betta",
+                    "No yo didnt",
+                    "Yo",
+                    "Yo, Yo",
+                    "Yo, Yo, Yo!"
+                ]
+                
+                message = messages[messageNumber]
+                imageName = "image\(imageNumber)"
+                imageNumber += 1
+                if (imageNumber > 9) { imageNumber = 0  }
+                messageNumber += 1
+                if (messageNumber >= messages.count) {
+                    messageNumber = 0
+                }
+                print(imageNumber)
             }
-            .buttonBorderShape(.roundedRectangle)
             .buttonStyle(.borderedProminent)
             .font(.title2)
         }
